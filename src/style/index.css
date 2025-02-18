@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@plugin "./custom-icon";
+
+@variant dark (&:where(.dark, .dark *));
+
+
+.btn {
+  background-color: var(--color-sky-500);
+  &:hover {
+    background-color: var(--color-sky-700);
+  }
+}
