@@ -3,7 +3,7 @@ import { pluginReact } from '@rsbuild/plugin-react'
 import { TanStackRouterRspack } from '@tanstack/router-plugin/rspack'
 import { version } from './package.json' with { type: 'json' }
 
-const APP_TITLE = 'template rs'
+const APP_TITLE = 'Resume Generator'
 
 export default defineConfig({
   plugins: [pluginReact()],
@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   html: {
-    favicon: './src/assets/icon/app-icon.png',
+    favicon: './src/assets/icon/favicon.ico',
     title: APP_TITLE,
   },
   performance: {
