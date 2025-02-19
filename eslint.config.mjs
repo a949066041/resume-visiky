@@ -18,6 +18,7 @@ export default antfu({
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   ignores: [
     'custom.json',
+    'routeTree.gen.ts',
     // ...globs
   ],
 }, {
