@@ -52,7 +52,7 @@
     "config.ts": "*.config.ts, *.config.js, *.config.cjs, *.config.mjs,tsconfig.json, jsconfig.json"
   },
   "marscode.codeCompletionPro": {
-    "enableCodeCompletionPro": true
+    "enableCodeCompletionPro": false
   },
   "marscode.enableInlineCommand": true,
   "marscode.chatLanguage": "cn"

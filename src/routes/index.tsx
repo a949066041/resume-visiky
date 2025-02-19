@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { Affix, Alert, Button, Spin } from 'antd'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import z from 'zod'
 import { resumeQueryOptions } from '~/api'
-import { useModeSwitcher } from '~/hooks'
+import Drawer from '~/components/Drawer'
+import { useModeSwitcher, useRootSearch } from '~/hooks'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -18,7 +19,8 @@ export const Route = createFileRoute('/')({
 })
 
 function EditBanner() {
-  const { user = 'visiky' } = useSearch({ from: '/' })
+  const { params } = useRootSearch()
+  const { user = 'visiky' } = params
   return (
     <Alert
       type="warning"
@@ -62,7 +64,6 @@ function RouteComponent() {
   const navigate = Route.useNavigate()
 
   const { isEdit } = useModeSwitcher()
-  const { template, user } = Route.useSearch()
 
   useEffect(() => {
     navigate({ search: { lang: i18n.language } })
@@ -82,7 +83,7 @@ function RouteComponent() {
           <>
             <Affix offsetTop={0}>
               <div className=" space-y-2 w-[106px]">
-                <Button type="primary" block>进行配置</Button>
+                <Drawer />
                 <Button type="primary" block>复制配置</Button>
                 <Button type="primary" block>保存简历</Button>
                 <Button block>导入配置</Button>

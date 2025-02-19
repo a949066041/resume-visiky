@@ -23,6 +23,7 @@
     "@tailwindcss/postcss": "^4.0.6",
     "@tanstack/react-query": "^5.66.6",
     "@tanstack/react-router": "^1.105.0",
+    "ahooks": "^3.8.4",
     "antd": "^5.24.1",
     "classix": "^2.2.2",
     "dayjs": "^1.11.13",
