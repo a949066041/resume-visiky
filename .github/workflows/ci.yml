@@ -1,4 +1,4 @@
-name: autofix.ci # needed to securely identify the workflow
+name: public.ci # needed to securely identify the workflow
 
 on:
   pull_request:
@@ -32,5 +32,5 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
