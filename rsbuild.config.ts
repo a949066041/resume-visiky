@@ -19,6 +19,9 @@ export default defineConfig({
     favicon: './src/assets/icon/favicon.ico',
     title: APP_TITLE,
   },
+  output: {
+    assetPrefix: '/resume-visiky',
+  },
   tools: {
     rspack: {
       plugins: [TanStackRouterRspack()],
