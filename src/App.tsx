@@ -3,6 +3,7 @@ import { routeTree } from './routeTree.gen'
 import { queryClient } from './store'
 
 const router = createRouter({
+  basepath: '/resume-visiky',
   routeTree,
   context: { queryClient },
 })

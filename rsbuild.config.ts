@@ -24,7 +24,7 @@ export default defineConfig({
   },
   tools: {
     rspack: {
-      plugins: [TanStackRouterRspack()],
+      plugins: [TanStackRouterRspack({ routeTreeFileHeader: [] })],
     },
   },
 })
