@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, useSearch } from '@tanstack/react-router'
-import { Alert, Spin } from 'antd'
+import { Affix, Alert, Button, Spin } from 'antd'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import z from 'zod'
@@ -68,16 +68,29 @@ function RouteComponent() {
     navigate({ search: { lang: i18n.language } })
   }, [i18n.language, navigate])
 
-  const { isLoading } = useQuery(resumeQueryOptions(i18n.language, 'master', user))
+  const { isLoading, data } = useQuery(resumeQueryOptions(i18n.language, 'master', 'visiky'))
 
   return (
     <div className=" btn">
       <Spin spinning={isLoading}>
         { isEdit && <EditBanner /> }
-        <div className="  mx-auto p-3 w-3xl mb-10">
-          <div className="min-h-[942px] shadow-lg ">
+        <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
+          <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
             123
+            { JSON.stringify(data) }
           </div>
+          <>
+            <Affix offsetTop={0}>
+              <div className=" space-y-2 w-[106px]">
+                <Button type="primary" block>进行配置</Button>
+                <Button type="primary" block>复制配置</Button>
+                <Button type="primary" block>保存简历</Button>
+                <Button block>导入配置</Button>
+                <Button type="primary" block>下载PDF</Button>
+                <Button type="primary" block>分享</Button>
+              </div>
+            </Affix>
+          </>
         </div>
       </Spin>
     </div>

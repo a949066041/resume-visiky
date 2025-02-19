@@ -25,7 +25,10 @@ function RootComponent() {
   }, [i18n])
 
   return (
-    <ConfigProvider locale={i18n.language === 'zh' ? zhCN : en} componentSize="small">
+    <ConfigProvider
+      locale={i18n.language === 'zh' ? zhCN : en}
+      theme={{ token: { colorPrimary: '#273f75', borderRadius: 2 } }}
+    >
       <Header />
       <Outlet />
       <Footer />
