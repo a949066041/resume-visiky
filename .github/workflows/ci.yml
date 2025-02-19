@@ -1,15 +1,18 @@
 name: public.ci # needed to securely identify the workflow
 
 on:
-  pull_request:
   push:
-    branches: [main]
-permissions:
-  contents: read
+    branches:
+      - main  # Set a branch name to trigger deployment
+  pull_request:
 
 jobs:
   autofix:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     strategy:
       matrix:
         node-version: [22]
