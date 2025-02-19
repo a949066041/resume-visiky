@@ -1,12 +1,13 @@
 import React from 'react'
+import appConfig from '~/utils/app.config'
 
 function Footer() {
   // TODO serach obj
-  const user = 'visiky'
+  const user = appConfig.appAuthor
 
   return (
     <footer className=" fixed bottom-0 left-0 right-0 pt-6">
-      <div className=" flex justify-center text-sm items-center p-3 bg-[#273f75] text-[#ffffffd9]">
+      <div className=" flex justify-center text-sm items-center p-3 bg-primary text-text-white">
         <div>
           <span className="">Made with ❤️</span>
           <span className="mx-1">
@@ -25,12 +26,12 @@ function Footer() {
         </div>
 
         <a
-          href="https://github.com/visiky/resume.git"
-          className=" text-[#ffffffd9] hover:text-white absolute right-2 text-xs"
+          href={appConfig.appHome}
+          className="  text-text-white hover:text-white absolute right-2 text-xs flex items-center"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <i className="icon-[icon-park-outline--github] mr-1 text-white"></i>
+          <i className="icon-[icon-park-outline--github] mr-1 text-sm "></i>
           {' '}
           项目代码
         </a>

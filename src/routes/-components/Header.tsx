@@ -1,11 +1,13 @@
 import React from 'react'
+import LangSwitcher from '~/components/LangSwitcher'
+import ModeSwitcher from '~/components/ModeSwitcher'
 
 function Header() {
   return (
-    <header className=" flex justify-between py-2 px-3 bg-[#273f75] text-[#ffffffd9]">
-      <span />
+    <header className=" flex justify-end py-2 px-3 bg-primary text-text-white">
       <span>
-
+        <ModeSwitcher />
+        <LangSwitcher />
       </span>
     </header>
   )

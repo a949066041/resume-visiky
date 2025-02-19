@@ -4,6 +4,12 @@
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a",
+  "author": "a949066041",
+  "homepage": "https://github.com/a949066041/resume-visiky",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:a949066041/resume-visiky.git"
+  },
   "scripts": {
     "dev": "rsbuild dev",
     "postinstall": "esno scripts/svg2json.ts",
@@ -16,6 +22,7 @@
     "@tailwindcss/postcss": "^4.0.6",
     "@tanstack/react-query": "^5.66.6",
     "@tanstack/react-router": "^1.105.0",
+    "antd": "^5.24.1",
     "classix": "^2.2.2",
     "dayjs": "^1.11.13",
     "esno": "^4.8.0",
