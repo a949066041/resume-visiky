@@ -1,9 +1,12 @@
 import { useToggle } from 'ahooks'
-import { Drawer as AntdDrawer, Button, Radio } from 'antd'
+import { Drawer as AntdDrawer, Button, Segmented } from 'antd'
+import { useState } from 'react'
+import ModuleContent from '../ModuleContent'
 import { Templates } from '../Templates'
 
 function Drawer() {
   const [visible, { set: setVisible }] = useToggle()
+  const [type, setType] = useState<'template' | 'module'>('template')
 
   return (
     <>
@@ -16,19 +19,21 @@ function Drawer() {
         <AntdDrawer
           open={visible}
           closable={false}
+          width={600}
           title={(
-            <Radio.Group>
-              <Radio.Button value="template">
-                选择模板
-              </Radio.Button>
-              <Radio.Button value="module">
-                配置简历
-              </Radio.Button>
-            </Radio.Group>
+            <Segmented
+              value={type}
+              onChange={setType}
+              shape="round"
+              options={[
+                { value: 'template', label: '选择模板' },
+                { value: 'module', label: '配置简历' },
+              ]}
+            />
           )}
           onClose={() => setVisible(false)}
         >
-          <Templates />
+          { type === 'module' ? <ModuleContent /> : <Templates /> }
         </AntdDrawer>
       </Button>
     </>
