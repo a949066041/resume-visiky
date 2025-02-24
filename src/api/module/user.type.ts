@@ -1,3 +1,5 @@
+export type ResumeConfigKeys = keyof ResumeConfig
+
 /** 简历配置内容 */
 export interface ResumeConfig {
   /** 头像 */

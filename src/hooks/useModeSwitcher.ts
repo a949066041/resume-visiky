@@ -1,28 +1,26 @@
-import { useNavigate, useSearch } from '@tanstack/react-router'
+import type { ModeKeys } from '~/constant'
 import { useMemo } from 'react'
+import { useRootSearch } from './useRootSearch'
 
 export function useModeSwitcher() {
-  const navigate = useNavigate({ from: '/' })
-  const { mode, user } = useSearch({ from: '/' })
+  const { params, changeSearch } = useRootSearch()
 
   const canPreview = useMemo(() => {
-    return !!user
-  }, [user])
+    return !!params.user
+  }, [params.user])
 
-  function changeMode(changeMode: 'read' | 'edit') {
-    if (mode === changeMode) {
+  function changeMode(changeMode: ModeKeys) {
+    if (params.mode === changeMode) {
       return
     }
-    navigate({
-      search: {
-        mode: changeMode,
-      },
+    changeSearch({
+      mode: changeMode,
     })
   }
 
   return {
     canPreview,
-    isEdit: mode === 'edit',
+    isEdit: params.mode === 'edit',
     changeMode,
   }
 }
