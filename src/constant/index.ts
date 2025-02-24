@@ -1,4 +1,5 @@
 import type { CollapseProps } from 'antd'
+import type { ResumeConfigKeys } from '~/api'
 import { z } from 'zod'
 
 export type LangKeys = 'zh' | 'en'
@@ -38,7 +39,7 @@ export const TEMPLATES: Template[] = [
   },
 ]
 
-export function moduleList(cb?: (key: string) => void) {
+export function moduleList(cb?: (key: ResumeConfigKeys) => void) {
   return [
     {
       label: '头像设置',
@@ -49,6 +50,8 @@ export function moduleList(cb?: (key: string) => void) {
     {
       label: '个人信息',
       key: 'profile',
+      collapsible: 'icon',
+      showArrow: false,
     },
     {
       label: '教育背景',
@@ -57,6 +60,8 @@ export function moduleList(cb?: (key: string) => void) {
     {
       label: '自我介绍',
       key: 'aboutme',
+      collapsible: 'icon',
+      showArrow: false,
     },
     {
       label: '更多信息',
@@ -78,5 +83,9 @@ export function moduleList(cb?: (key: string) => void) {
       label: '项目经历',
       key: 'projectList',
     },
-  ].map(item => ({ ...item, className: ' rounder-sm  mb-2 !border-none !rounded-2xl bg-black/5', onClick: () => cb?.(item.key) })) as CollapseProps['items']
+  ].map(item => ({
+    ...item,
+    className: ' rounder-sm  mb-2 !border-none !rounded-2xl bg-black/5',
+    onClick: (!item.showArrow && typeof item.showArrow === 'boolean') ? () => cb?.(item.key as unknown as ResumeConfigKeys) : null,
+  })) as CollapseProps['items']
 }

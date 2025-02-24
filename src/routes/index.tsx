@@ -1,12 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { Affix, Alert, Button, Spin } from 'antd'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import z from 'zod'
-import { resumeQueryOptions } from '~/api'
 import Drawer from '~/components/Drawer'
-import { useModeSwitcher, useRootSearch } from '~/hooks'
+import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -62,14 +60,12 @@ function EditBanner() {
 function RouteComponent() {
   const { i18n } = useTranslation()
   const navigate = Route.useNavigate()
-
+  const { isLoading, data } = useGlobalData()
   const { isEdit } = useModeSwitcher()
 
   useEffect(() => {
     navigate({ search: { lang: i18n.language } })
   }, [i18n.language, navigate])
-
-  const { isLoading, data } = useQuery(resumeQueryOptions(i18n.language, 'master', 'visiky'))
 
   return (
     <div className=" btn">
@@ -77,7 +73,6 @@ function RouteComponent() {
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
           <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
-            123
             { JSON.stringify(data) }
           </div>
           <>

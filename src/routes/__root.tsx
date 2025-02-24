@@ -6,6 +6,7 @@ import zhCN from 'antd/locale/zh_CN'
 import dayjs from 'dayjs'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import DataContextProvider from '~/hooks/useData'
 import Footer from './-components/Footer'
 import Header from './-components/Header'
 
@@ -25,13 +26,15 @@ function RootComponent() {
   }, [i18n])
 
   return (
-    <ConfigProvider
-      locale={i18n.language === 'zh' ? zhCN : en}
-      theme={{ token: { colorPrimary: '#273f75', borderRadius: 2 } }}
-    >
-      <Header />
-      <Outlet />
-      <Footer />
-    </ConfigProvider>
+    <DataContextProvider>
+      <ConfigProvider
+        locale={i18n.language === 'zh' ? zhCN : en}
+        theme={{ token: { colorPrimary: '#273f75', borderRadius: 2 } }}
+      >
+        <Header />
+        <Outlet />
+        <Footer />
+      </ConfigProvider>
+    </DataContextProvider>
   )
 }
