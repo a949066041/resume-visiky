@@ -2,12 +2,13 @@ import type { ResumeConfigKeys } from '~/api'
 import type { ConfigSchema } from '~/constant/schema'
 import { useToggle } from 'ahooks'
 import { Collapse, Drawer } from 'antd'
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { moduleList } from '~/constant'
 import formSchemaConfig from '~/constant/schema'
 import FormCreator from '../FormCreator'
+import ModuleContentChildren from './ModeuleContentChildren'
 
 const formList = moduleList()
 
@@ -31,7 +32,8 @@ function ModuleContent() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Collapse accordion items={moduleList(handleConfigDrawer)} bordered={false} />
+      <Collapse accordion items={moduleList(handleConfigDrawer)?.map((item) => ({
+        ...item, children: <ModuleContentChildren parentKey={item.key as ResumeConfigKeys} /> }))} bordered={false} />
       <Drawer
         closable={false}
         open={visible}
