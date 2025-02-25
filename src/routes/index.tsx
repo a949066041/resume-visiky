@@ -58,14 +58,14 @@ function EditBanner() {
 }
 
 function RouteComponent() {
+  const { changeSearch } = useRootSearch()
   const { i18n } = useTranslation()
-  const navigate = Route.useNavigate()
   const { isLoading, data } = useGlobalData()
   const { isEdit } = useModeSwitcher()
 
   useEffect(() => {
-    navigate({ search: { lang: i18n.language } })
-  }, [i18n.language, navigate])
+    changeSearch({ lang: i18n.language })
+  }, [changeSearch, i18n.language])
 
   return (
     <div className=" btn">
@@ -75,18 +75,23 @@ function RouteComponent() {
           <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
             { JSON.stringify(data) }
           </div>
-          <>
-            <Affix offsetTop={0}>
-              <div className=" space-y-2 w-[106px]">
-                <Drawer />
-                <Button type="primary" block>复制配置</Button>
-                <Button type="primary" block>保存简历</Button>
-                <Button block>导入配置</Button>
-                <Button type="primary" block>下载PDF</Button>
-                <Button type="primary" block>分享</Button>
-              </div>
-            </Affix>
-          </>
+          {
+            isEdit && (
+              <>
+                <Affix offsetTop={0}>
+                  <div className=" space-y-2 w-[106px]">
+                    <Drawer />
+                    <Button type="primary" block>复制配置</Button>
+                    <Button type="primary" block>保存简历</Button>
+                    <Button block>导入配置</Button>
+                    <Button type="primary" block>下载PDF</Button>
+                    <Button type="primary" block>分享</Button>
+                  </div>
+                </Affix>
+              </>
+            )
+          }
+
         </div>
       </Spin>
     </div>
