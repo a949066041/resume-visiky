@@ -60,7 +60,7 @@ function EditBanner() {
 function RouteComponent() {
   const { changeSearch } = useRootSearch()
   const { i18n } = useTranslation()
-  const { isLoading, data } = useGlobalData()
+  const { isLoading, data, copyConfig } = useGlobalData()
   const { isEdit } = useModeSwitcher()
 
   useEffect(() => {
@@ -81,7 +81,7 @@ function RouteComponent() {
                 <Affix offsetTop={0}>
                   <div className=" space-y-2 w-[106px]">
                     <Drawer />
-                    <Button type="primary" block>复制配置</Button>
+                    <Button type="primary" block onClick={() => copyConfig()}>复制配置</Button>
                     <Button type="primary" block>保存简历</Button>
                     <Button block>导入配置</Button>
                     <Button type="primary" block>下载PDF</Button>
