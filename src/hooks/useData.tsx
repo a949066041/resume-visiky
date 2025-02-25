@@ -21,7 +21,7 @@ export default function DataContextProvider({ children }: { children: React.Reac
     },
   )
 
-  const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', false))
+  const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', !message))
 
   const confirmMessage = useCallback((renderKey: ResumeConfigKeys, data: any) => {
     setMessage(prevData => ({ ...prevData, [renderKey]: data }))
@@ -43,9 +43,9 @@ export default function DataContextProvider({ children }: { children: React.Reac
   }, [confirmMessage, isLoading, message, refreshData])
 
   return (
-    <DataContext value={value}>
+    <DataContext.Provider value={value}>
       { children }
-    </DataContext>
+    </DataContext.Provider>
   )
 }
 

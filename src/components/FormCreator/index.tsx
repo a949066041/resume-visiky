@@ -1,45 +1,53 @@
+import type { Schema } from 'form-render'
 import type { ResumeConfigKeys } from '~/api'
-import type { ConfigSchema } from '~/constant/schema'
-import { Theme as AntDTheme } from '@rjsf/antd'
-import { withTheme } from '@rjsf/core'
-import validator from '@rjsf/validator-ajv8'
-import { useMemo } from 'react'
+import FormRender, { useForm } from 'form-render'
+import { isArray } from 'lodash-es'
+import { useEffect, useMemo } from 'react'
 import { useGlobalData } from '~/hooks'
 
-const Form = withTheme(AntDTheme)
 interface IFormCreatorProps {
-  schema: ConfigSchema
+  schema: Schema
   schemaKey: ResumeConfigKeys
+  listIndex?: number
+  onClose: () => void
 }
 
-function FormCreator({ schema, schemaKey }: IFormCreatorProps) {
+function FormCreator({ schema, schemaKey, listIndex = 0, onClose }: IFormCreatorProps) {
   const { data, confirmMessage } = useGlobalData()
+  const form = useForm()
 
-  const formData = useMemo(() => {
-    if (data) {
-      return data[schemaKey]
+  const isList = useMemo<boolean>(() => {
+    const mapDataValue = data?.[schemaKey]
+
+    return isArray(mapDataValue)
+  }, [schemaKey, data])
+
+  useEffect(() => {
+    const mapDataValue = data?.[schemaKey]
+    form.resetFields()
+    if (data && mapDataValue) {
+      form.setValues(isList ? ((mapDataValue as unknown[])[listIndex] || {}) : mapDataValue)
     }
-    return {}
-  }, [data, schemaKey])
+  }, [data, schemaKey, form, listIndex, isList])
+
+  function saveFormData(formData: FormData) {
+    if (!isList) {
+      confirmMessage(schemaKey, formData)
+      onClose()
+      return
+    }
+    const originData = (data![schemaKey] as unknown[]).slice()
+    originData[listIndex] = formData
+    confirmMessage(schemaKey, originData)
+    onClose()
+  }
 
   return (
-    <Form
-      validator={validator}
-      formData={formData}
-      onSubmit={({ formData }) => confirmMessage(schemaKey, formData)}
-      uiSchema={{
-        ...schema.ui,
-        'ui:options': {
-          submitButtonOptions: {
-            props: {
-              type: 'primary',
-            },
-            submitText: '提交',
-          },
-        },
-      }}
-      showErrorList={false}
-      schema={schema.form}
+    <FormRender
+      form={form}
+      schema={schema}
+      footer
+      onFinish={saveFormData}
     />
   )
 }

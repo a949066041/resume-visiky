@@ -1,10 +1,8 @@
+import type { Schema } from 'form-render'
 import type { ResumeConfigKeys } from '~/api'
-import type { ConfigSchema } from '~/constant/schema'
 import { useToggle } from 'ahooks'
 import { Collapse, Drawer } from 'antd'
-import { useMemo, useRef, useState } from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useMemo, useState } from 'react'
 import { moduleList } from '~/constant'
 import formSchemaConfig from '~/constant/schema'
 import FormCreator from '../FormCreator'
@@ -15,7 +13,8 @@ const formList = moduleList()
 function ModuleContent() {
   const [renderKey, setRenderKey] = useState<ResumeConfigKeys>(null!)
   const [visible, { set: setVisible }] = useToggle()
-  const [currentSchema, setCurrentSchema] = useState<ConfigSchema>({ form: { }, ui: {} })
+  const [currentSchema, setCurrentSchema] = useState<Schema | null>(null)
+  const [listIndex, setListIndex] = useState(0)
 
   const formSchema = useMemo(() => {
     if (!renderKey) {
@@ -24,25 +23,39 @@ function ModuleContent() {
     return formList!.find(item => item.key === renderKey)
   }, [renderKey])
 
-  function handleConfigDrawer(key: ResumeConfigKeys) {
+  function handleConfigDrawer(key: ResumeConfigKeys, listIndex = 0) {
     setRenderKey(key)
-    setVisible(true)
+    setListIndex(listIndex)
     setCurrentSchema(formSchemaConfig[key])
+
+    setVisible(true)
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <Collapse accordion items={moduleList(handleConfigDrawer)?.map((item) => ({
-        ...item, children: <ModuleContentChildren parentKey={item.key as ResumeConfigKeys} /> }))} bordered={false} />
+    <>
+      <Collapse
+        accordion
+        items={moduleList(handleConfigDrawer)?.map(item => ({
+          ...item,
+          children: (
+            <ModuleContentChildren
+              key={item.key}
+              onConfig={listIndex => handleConfigDrawer(item.key as ResumeConfigKeys, listIndex)}
+              parentKey={item.key as ResumeConfigKeys}
+            />
+          ),
+        }))}
+        bordered={false}
+      />
       <Drawer
         closable={false}
         open={visible}
         onClose={() => setVisible(false)}
         title={formSchema?.label}
       >
-        <FormCreator schema={currentSchema} schemaKey={renderKey} />
+        <FormCreator schema={currentSchema!} schemaKey={renderKey} listIndex={listIndex} onClose={() => setVisible(false)} />
       </Drawer>
-    </DndProvider>
+    </>
   )
 }
 
