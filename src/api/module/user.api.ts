@@ -5,7 +5,6 @@ import { fetchClient } from '~/api/fetch'
 /**
  * api
  */
-
 export function fetchResume(lang: string, branch?: string, user?: string) {
   return fetchClient.get<ResumeConfig>(`https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`)
 }
@@ -13,10 +12,14 @@ export function fetchResume(lang: string, branch?: string, user?: string) {
 /**
  * react query client
  */
-export function resumeQueryOptions(lang: string, branch?: string, user?: string) {
+export function resumeQueryOptions(
+  lang: string,
+  branch?: string,
+  init = false,
+) {
   return queryOptions({
-    enabled: !!user,
-    queryKey: ['resume', { lang, branch, user }],
-    queryFn: () => fetchResume(lang, branch, user),
+    enabled: init,
+    queryKey: ['resume', { lang, branch, user: 'visiky' }],
+    queryFn: () => fetchResume(lang, branch, 'visiky'),
   })
 }

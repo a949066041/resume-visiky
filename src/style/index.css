@@ -7,6 +7,7 @@
   --color-primary: #273f75;
   --color-text-white: #ffffffd9;
   --color-text-disabled: #ffffff40;
+  --color-text-desc: #00000073;
 }
 
 @variant dark (&:where(.dark, .dark *));
