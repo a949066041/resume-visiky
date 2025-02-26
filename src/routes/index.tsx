@@ -1,10 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Affix, Alert, Button, Spin } from 'antd'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
 import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
+import Template from './-components/Template'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -58,10 +59,14 @@ function EditBanner() {
 }
 
 function RouteComponent() {
-  const { changeSearch } = useRootSearch()
+  const { changeSearch, params } = useRootSearch()
   const { i18n } = useTranslation()
-  const { isLoading, data, copyConfig } = useGlobalData()
+  const { isLoading, copyConfig } = useGlobalData()
   const { isEdit } = useModeSwitcher()
+
+  const RenderTempate = useMemo(() => {
+    return Template[params.template]
+  }, [params.template])
 
   useEffect(() => {
     changeSearch({ lang: i18n.language })
@@ -73,7 +78,7 @@ function RouteComponent() {
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
           <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
-            { JSON.stringify(data) }
+            <RenderTempate />
           </div>
           {
             isEdit && (

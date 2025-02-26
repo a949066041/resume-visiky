@@ -1,7 +1,7 @@
 import type { ResumeConfig, ResumeConfigKeys } from '~/api'
-import { App, message } from 'antd'
-import { useQuery } from '@tanstack/react-query'
 import { useClipboard, useLocalStorage } from '@mantine/hooks'
+import { useQuery } from '@tanstack/react-query'
+import { App } from 'antd'
 import { createContext, useCallback, useContext, useEffect, useMemo } from 'react'
 import { resumeQueryOptions } from '~/api'
 
@@ -22,9 +22,8 @@ export default function DataContextProvider({ children }: { children: React.Reac
       defaultValue: undefined,
     },
   )
-  const clipboard = useClipboard({ timeout: 500 });
+  const clipboard = useClipboard({ timeout: 500 })
   const { message } = App.useApp()
-
   const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', !message))
 
   const confirmMessage = useCallback((renderKey: ResumeConfigKeys, data: any) => {
@@ -37,6 +36,11 @@ export default function DataContextProvider({ children }: { children: React.Reac
     }
   }, [data, setConfigValue])
 
+  const copyConfig = useCallback(() => {
+    clipboard.copy(JSON.stringify(configValue, null, 2))
+    message.success('复制成功')
+  }, [message, clipboard, configValue])
+
   const value = useMemo(() => {
     return {
       isLoading,
@@ -45,12 +49,7 @@ export default function DataContextProvider({ children }: { children: React.Reac
       refetch: refreshData,
       confirmMessage,
     }
-  }, [confirmMessage, isLoading, message, refreshData, copyConfig])
-
-  async function copyConfig() {
-    clipboard.copy('Hello, world!')
-    message.success('复制成功')
-  }
+  }, [isLoading, configValue, copyConfig, refreshData, confirmMessage])
 
   return (
     <DataContext.Provider value={value}>

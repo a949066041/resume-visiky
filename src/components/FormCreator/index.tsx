@@ -28,7 +28,8 @@ function FormCreator({ schema, schemaKey, listIndex = 0, onClose }: IFormCreator
     if (data && mapDataValue) {
       form.setValues(isList ? ((mapDataValue as unknown[])[listIndex] || {}) : mapDataValue)
     }
-  }, [data, schemaKey, form, listIndex, isList])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schemaKey, listIndex, isList])
 
   function saveFormData(formData: FormData) {
     if (!isList) {
