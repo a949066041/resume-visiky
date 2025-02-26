@@ -1,6 +1,6 @@
 import type { Schema } from 'form-render'
 import type { ResumeConfigKeys } from '~/api'
-import { useToggle } from '@mantine/hooks';
+import { useToggle } from '@mantine/hooks'
 import { Collapse, Drawer } from 'antd'
 import { useMemo, useState } from 'react'
 import { moduleList } from '~/constant'

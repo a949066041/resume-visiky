@@ -1,4 +1,4 @@
-import { useToggle } from '@mantine/hooks';
+import { useToggle } from '@mantine/hooks'
 import { Drawer as AntdDrawer, Button, Segmented } from 'antd'
 import { useState } from 'react'
 import ModuleContent from '../ModuleContent'

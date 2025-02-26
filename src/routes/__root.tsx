@@ -1,6 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
-import { ConfigProvider, App } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import en from 'antd/es/locale/en_US'
 import zhCN from 'antd/locale/zh_CN'
 import dayjs from 'dayjs'
@@ -32,9 +32,9 @@ function RootComponent() {
           locale={i18n.language === 'zh' ? zhCN : en}
           theme={{ token: { colorPrimary: '#273f75', borderRadius: 2 } }}
         >
-            <Header />
-            <Outlet />
-            <Footer />
+          <Header />
+          <Outlet />
+          <Footer />
         </ConfigProvider>
       </DataContextProvider>
     </App>
