@@ -85,6 +85,14 @@ function ModuleContentChildren({ parentKey, onConfig }: { parentKey: ResumeConfi
     confirmMessage(parentKey, newData)
   }, [data, parentKey, confirmMessage])
 
+  const handleDelete = useCallback((index: number) => {
+    const prevData = data![parentKey]! as unknown[]
+    const newData = update(prevData, {
+      $splice: [[index, 1]],
+    })
+    confirmMessage(parentKey, newData)
+  }, [data, parentKey, confirmMessage])
+
   return (
     <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
       <div className=" space-y-2">
@@ -93,7 +101,12 @@ function ModuleContentChildren({ parentKey, onConfig }: { parentKey: ResumeConfi
             {
               (subList || []).map((item, index) => (
                 <SortableItem key={item.id} value={item.value} id={item.id}>
-                  <div onClick={() => onConfig(index)} className="  truncate hover:bg-amber-600 py-2 px-3 rounded-xl transition-all" key={item.id}>{item.value}</div>
+                  <div className=" flex hover:bg-amber-600  py-2 px-3 rounded-xl transition-all items-center">
+                    <div onClick={() => onConfig(index)} className=" flex-1  truncate " key={item.id}>
+                      {item.value}
+                    </div>
+                    <i className="icon-[icon-park-outline--delete] cursor-pointer" onClick={() => handleDelete(index)}></i>
+                  </div>
                 </SortableItem>
               ))
             }

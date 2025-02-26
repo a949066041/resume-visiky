@@ -1,11 +1,11 @@
-import { useToggle } from 'ahooks'
+import { useToggle } from '@mantine/hooks'
 import { Drawer as AntdDrawer, Button, Segmented } from 'antd'
 import { useState } from 'react'
 import ModuleContent from '../ModuleContent'
-import { Templates } from '../Templates'
+import TemplatesPreview from '../TemplatesPreview'
 
 function Drawer() {
-  const [visible, { set: setVisible }] = useToggle()
+  const [visible, setVisible] = useToggle()
   const [type, setType] = useState<'template' | 'module'>('template')
 
   return (
@@ -33,7 +33,7 @@ function Drawer() {
           )}
           onClose={() => setVisible(false)}
         >
-          { type === 'module' ? <ModuleContent /> : <Templates /> }
+          { type === 'module' ? <ModuleContent /> : <TemplatesPreview /> }
         </AntdDrawer>
       </Button>
     </>

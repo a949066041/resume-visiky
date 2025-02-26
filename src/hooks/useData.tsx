@@ -1,6 +1,7 @@
 import type { ResumeConfig, ResumeConfigKeys } from '~/api'
+import { useClipboard, useLocalStorage } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
-import { useLocalStorageState } from 'ahooks'
+import { App } from 'antd'
 import { createContext, useCallback, useContext, useEffect, useMemo } from 'react'
 import { resumeQueryOptions } from '~/api'
 
@@ -8,39 +9,47 @@ export interface DataLoading {
   isLoading: boolean
   data: ResumeConfig | undefined
   refetch: () => void
+  copyConfig: () => void
   confirmMessage: (renderKey: ResumeConfigKeys, data: any) => void
 }
 
 const DataContext = createContext<DataLoading | null>(null)
 
 export default function DataContextProvider({ children }: { children: React.ReactNode }) {
-  const [message, setMessage] = useLocalStorageState<ResumeConfig | undefined>(
-    'use-global-data',
+  const [configValue, setConfigValue] = useLocalStorage<ResumeConfig | undefined>(
     {
+      key: 'use-global-data',
       defaultValue: undefined,
     },
   )
-
+  const clipboard = useClipboard({ timeout: 500 })
+  const { message } = App.useApp()
   const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', !message))
 
   const confirmMessage = useCallback((renderKey: ResumeConfigKeys, data: any) => {
-    setMessage(prevData => ({ ...prevData, [renderKey]: data }))
-  }, [setMessage])
+    setConfigValue(prevData => ({ ...prevData, [renderKey]: data }))
+  }, [setConfigValue])
 
   useEffect(() => {
     if (data) {
-      setMessage(data)
+      setConfigValue(data)
     }
-  }, [data, setMessage])
+  }, [data, setConfigValue])
+
+  const copyConfig = useCallback(() => {
+    clipboard.copy(JSON.stringify(configValue, null, 2))
+    message.success('复制成功')
+  }, [message, clipboard, configValue])
 
   const value = useMemo(() => {
     return {
       isLoading,
-      data: message,
+      data: configValue,
+      copyConfig,
       refetch: refreshData,
       confirmMessage,
     }
-  }, [confirmMessage, isLoading, message, refreshData])
+  }, [isLoading, configValue, copyConfig, refreshData, confirmMessage])
 
   return (
     <DataContext.Provider value={value}>

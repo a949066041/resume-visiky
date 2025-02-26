@@ -1,6 +1,6 @@
 import type { Schema } from 'form-render'
 import type { ResumeConfigKeys } from '~/api'
-import { useToggle } from 'ahooks'
+import { useToggle } from '@mantine/hooks'
 import { Collapse, Drawer } from 'antd'
 import { useMemo, useState } from 'react'
 import { moduleList } from '~/constant'
@@ -12,7 +12,7 @@ const formList = moduleList()
 
 function ModuleContent() {
   const [renderKey, setRenderKey] = useState<ResumeConfigKeys>(null!)
-  const [visible, { set: setVisible }] = useToggle()
+  const [visible, setVisible] = useToggle()
   const [currentSchema, setCurrentSchema] = useState<Schema | null>(null)
   const [listIndex, setListIndex] = useState(0)
 
