@@ -1,11 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Affix, Alert, Button, Spin } from 'antd'
+import { Affix, Button, Spin } from 'antd'
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
 import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
+import EditBanner from './-components/EditBanner'
 import Template from './-components/Template'
 
 export const Route = createFileRoute('/')({
@@ -17,47 +18,6 @@ export const Route = createFileRoute('/')({
     mode: z.enum(['edit', 'read']).default('read'),
   }),
 })
-
-function EditBanner() {
-  const { params } = useRootSearch()
-  const { user = 'visiky' } = params
-  return (
-    <Alert
-      type="warning"
-      banner
-      closable={false}
-      showIcon={false}
-      message={(
-        <span>
-          编辑模式下, 切换国际化会导致正在配置的内容丢失，请及时保存
-          <span>
-            <span style={{ marginRight: '4px' }}>
-              👉
-              {' '}
-              {!user && '参考：'}
-            </span>
-            <span
-              style={{
-                color: `var(--primary-color, #1890ff)`,
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                window.open(`https://github.com/${user}/${user}`)
-              }}
-            >
-              {`${user}'s resumeInfo`}
-            </span>
-            <span>
-              {`（https://github.com/${user}/${
-                user || 'visiky'
-              }/blob/${'master'}/resume.json）`}
-            </span>
-          </span>
-        </span>
-      )}
-    />
-  )
-}
 
 function RouteComponent() {
   const { changeSearch, params } = useRootSearch()

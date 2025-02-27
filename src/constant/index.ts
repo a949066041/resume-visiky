@@ -1,5 +1,5 @@
 import type { CollapseProps } from 'antd'
-import type { ResumeConfigKeys } from '~/api'
+import type { ResumeConfig, ResumeConfigKeys } from '~/api'
 import { z } from 'zod'
 
 export type LangKeys = 'zh' | 'en'
@@ -89,3 +89,13 @@ export function moduleList(cb?: (key: ResumeConfigKeys) => void) {
     onClick: (!item.showArrow && typeof item.showArrow === 'boolean') ? () => cb?.(item.key as unknown as ResumeConfigKeys) : null,
   })) as CollapseProps['items']
 }
+
+export const profileConfig = [
+  ['mobile', 'icon-[icon-park-outline--phone-telephone]'],
+  ['email', 'icon-[icon-park-outline--mail]'],
+  ['github', 'icon-[icon-park-outline--github]'],
+  ['zhihu', 'icon-[ri--zhihu-fill]'],
+  ['workExpYear', 'icon-[ri--zhihu-fill]'],
+  ['workPlace', 'icon-[icon-park-outline--local-two]'],
+  ['positionTitle', 'icon-[icon-park-outline--like]'],
+] as [keyof ResumeConfig['profile'], string][]
