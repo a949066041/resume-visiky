@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Affix, Alert, Button, Spin } from 'antd'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
 import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
@@ -64,6 +65,9 @@ function RouteComponent() {
   const { isLoading, copyConfig } = useGlobalData()
   const { isEdit } = useModeSwitcher()
 
+  const contentRef = useRef<HTMLDivElement>(null)
+  const reactToPrintFn = useReactToPrint({ contentRef })
+
   const RenderTempate = useMemo(() => {
     return Template[params.template]
   }, [params.template])
@@ -77,7 +81,7 @@ function RouteComponent() {
       <Spin spinning={isLoading}>
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
-          <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
+          <div ref={contentRef} className="min-h-[942px] w-3xl mr-2 ">
             <RenderTempate />
           </div>
           {
@@ -89,7 +93,7 @@ function RouteComponent() {
                     <Button type="primary" block onClick={() => copyConfig()}>复制配置</Button>
                     <Button type="primary" block>保存简历</Button>
                     <Button block>导入配置</Button>
-                    <Button type="primary" block>下载PDF</Button>
+                    <Button type="primary" block onClick={() => reactToPrintFn()}>下载PDF</Button>
                     <Button type="primary" block>分享</Button>
                   </div>
                 </Affix>

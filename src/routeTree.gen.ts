@@ -4,8 +4,8 @@
 
 // Import Routes
 
-import { Route as PageImport } from './routes/$page'
 import { Route as rootRoute } from './routes/__root'
+import { Route as PageImport } from './routes/$page'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -56,7 +56,7 @@ export interface FileRoutesByTo {
 }
 
 export interface FileRoutesById {
-  '__root__': typeof rootRoute
+  __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
 }
@@ -76,8 +76,8 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute,
-  PageRoute,
+  IndexRoute: IndexRoute,
+  PageRoute: PageRoute,
 }
 
 export const routeTree = rootRoute
