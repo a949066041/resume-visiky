@@ -3,7 +3,7 @@ import clx from 'classix'
 import { useMemo } from 'react'
 import Avatar from '~/components/Avatar'
 import { profileConfig } from '~/constant'
-import { useGlobalData } from '~/hooks'
+import { SizeSpace, useGlobalData, useSize } from '~/hooks'
 
 function ProfileItem({ icon, value }: { value?: string, icon?: string }) {
   const { token } = theme.useToken()
@@ -17,6 +17,7 @@ function ProfileItem({ icon, value }: { value?: string, icon?: string }) {
 
 function Profile() {
   const { data } = useGlobalData()
+  const { size } = useSize()
 
   const profileList = useMemo(() => {
     if (!data?.profile) {
@@ -30,12 +31,12 @@ function Profile() {
 
   return (
     <div className=" flex  justify-between items-center">
-      <div className=" flex-1 space-y-2">
+      <SizeSpace className=' flex-1' direction='vertical'>
         <div className=" text-2xl ">{data?.profile?.name}</div>
-        <div className=" grid grid-cols-2 gap-2">
+        <div className=" grid grid-cols-2" style={{ gap: size * 2 }}>
           { profileList.map(item => (<ProfileItem key={item.id} {...item} />)) }
         </div>
-      </div>
+      </SizeSpace>
       {
         !data?.avatar?.hidden && (
           <div className=" w-20 h-20 flex-none">

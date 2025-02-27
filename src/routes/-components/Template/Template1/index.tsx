@@ -1,5 +1,5 @@
 import TextRender from '~/components/TextRender'
-import { useGlobalData } from '~/hooks'
+import { SizeSpace, useGlobalData } from '~/hooks'
 import EducationItem from './EducationItem'
 import Profile from './Profile'
 import ProjectItem from './ProjectItem'
@@ -10,7 +10,7 @@ function Template1() {
   const { data } = useGlobalData()
 
   return (
-    <div className=" px-6 py-4 space-y-3">
+    <SizeSpace className=" px-6 py-4" direction={'vertical'}>
       <Profile />
       <WrapperSection title="教育背景">
         {data?.educationList?.map(education => <EducationItem key={education.school} {...education} />)}
@@ -24,7 +24,7 @@ function Template1() {
       <WrapperSection title="项目经验">
         {data?.projectList?.map(project => <ProjectItem key={project.project_name} {...project} />)}
       </WrapperSection>
-    </div>
+    </SizeSpace>
   )
 }
 

@@ -10,7 +10,7 @@ function TextRender({ text }: ITextRenderProps) {
   }
 
   return (
-    <div className=" space-y-0.5">
+    <div className=" space-y-0.5 text-sm">
       {textList!.map(item => (<p key={item}>{item}</p>))}
     </div>
   )

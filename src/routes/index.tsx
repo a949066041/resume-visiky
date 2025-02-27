@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Affix, Button, Spin } from 'antd'
+import { Affix, Button, ColorPicker, Slider, Spin } from 'antd'
 import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
-import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
+import { useGlobalData, useModeSwitcher, useRootSearch, useSize } from '~/hooks'
 import EditBanner from './-components/EditBanner'
 import Template from './-components/Template'
 
@@ -26,6 +26,7 @@ function RouteComponent() {
   const { isEdit } = useModeSwitcher()
 
   const contentRef = useRef<HTMLDivElement>(null)
+  const { size, setSize, color, setColor } = useSize()
   const reactToPrintFn = useReactToPrint({ contentRef })
 
   const RenderTempate = useMemo(() => {
@@ -39,6 +40,10 @@ function RouteComponent() {
   return (
     <div className=" btn">
       <Spin spinning={isLoading}>
+        <div className=" w-[200px] fixed right-20 top-20">
+          <Slider value={size} onChange={setSize} min={4} max={6} />
+          <ColorPicker value={color} onChange={(_, color) => setColor(color)} trigger="click" />
+        </div>
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
           <div ref={contentRef} className="min-h-[942px] w-3xl mr-2 ">
