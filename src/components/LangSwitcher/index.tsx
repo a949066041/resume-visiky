@@ -17,7 +17,7 @@ function LangSwitcher() {
   }
 
   return (
-    <div className=" mx-[7px] inline-block text-xs">
+    <div className=" mx-2 inline-block text-xs">
       <Popover
         content={isEdit ? '编辑模式下, 切换国际化会导致正在配置的内容丢失，请及时保存' : null}
         placement="left"
@@ -27,7 +27,7 @@ function LangSwitcher() {
             langList.map(item => (
               <span
                 key={item.key}
-                className={clx('cursor-pointer mx-1', i18n.language !== item.key && 'text-text-disabled')}
+                className={clx('cursor-pointer mx-1', i18n.language !== item.key && ' text-white/85')}
                 onClick={() => handleChangeLang(item.key)}
                 data-lang={item.key}
               >

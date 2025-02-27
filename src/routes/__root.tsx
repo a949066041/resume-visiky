@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import DataContextProvider from '~/hooks/useData'
+import SizeContextProvider from '~/hooks/useSize'
 import Footer from './-components/Footer'
 import Header from './-components/Header'
 
@@ -27,16 +28,22 @@ function RootComponent() {
 
   return (
     <App>
-      <DataContextProvider>
-        <ConfigProvider
-          locale={i18n.language === 'zh' ? zhCN : en}
-          theme={{ token: { colorPrimary: '#273f75', borderRadius: 2 } }}
-        >
-          <Header />
-          <Outlet />
-          <Footer />
-        </ConfigProvider>
-      </DataContextProvider>
+      <SizeContextProvider>
+        {
+          ({ color }) => (
+            <DataContextProvider>
+              <ConfigProvider
+                locale={i18n.language === 'zh' ? zhCN : en}
+                theme={{ token: { colorPrimary: color, borderRadius: 2 } }}
+              >
+                <Header />
+                <Outlet />
+                <Footer />
+              </ConfigProvider>
+            </DataContextProvider>
+          )
+        }
+      </SizeContextProvider>
     </App>
   )
 }

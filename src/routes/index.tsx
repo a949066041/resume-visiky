@@ -1,10 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Affix, Alert, Button, Spin } from 'antd'
-import { useEffect, useMemo } from 'react'
+import { Affix, Button, ColorPicker, Slider, Spin } from 'antd'
+import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
-import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
+import { useGlobalData, useModeSwitcher, useRootSearch, useSize } from '~/hooks'
+import EditBanner from './-components/EditBanner'
 import Template from './-components/Template'
 
 export const Route = createFileRoute('/')({
@@ -17,52 +19,15 @@ export const Route = createFileRoute('/')({
   }),
 })
 
-function EditBanner() {
-  const { params } = useRootSearch()
-  const { user = 'visiky' } = params
-  return (
-    <Alert
-      type="warning"
-      banner
-      closable={false}
-      showIcon={false}
-      message={(
-        <span>
-          编辑模式下, 切换国际化会导致正在配置的内容丢失，请及时保存
-          <span>
-            <span style={{ marginRight: '4px' }}>
-              👉
-              {' '}
-              {!user && '参考：'}
-            </span>
-            <span
-              style={{
-                color: `var(--primary-color, #1890ff)`,
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                window.open(`https://github.com/${user}/${user}`)
-              }}
-            >
-              {`${user}'s resumeInfo`}
-            </span>
-            <span>
-              {`（https://github.com/${user}/${
-                user || 'visiky'
-              }/blob/${'master'}/resume.json）`}
-            </span>
-          </span>
-        </span>
-      )}
-    />
-  )
-}
-
 function RouteComponent() {
   const { changeSearch, params } = useRootSearch()
   const { i18n } = useTranslation()
   const { isLoading, copyConfig } = useGlobalData()
   const { isEdit } = useModeSwitcher()
+
+  const contentRef = useRef<HTMLDivElement>(null)
+  const { size, setSize, color, setColor } = useSize()
+  const reactToPrintFn = useReactToPrint({ contentRef })
 
   const RenderTempate = useMemo(() => {
     return Template[params.template]
@@ -75,9 +40,13 @@ function RouteComponent() {
   return (
     <div className=" btn">
       <Spin spinning={isLoading}>
+        <div className=" w-[200px] fixed right-20 top-20">
+          <Slider value={size} onChange={setSize} min={4} max={6} />
+          <ColorPicker value={color} onChange={(_, color) => setColor(color)} trigger="click" />
+        </div>
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
-          <div className="min-h-[942px]  w-3xl shadow-lg mr-2 ">
+          <div ref={contentRef} className="min-h-[942px] w-3xl mr-2 ">
             <RenderTempate />
           </div>
           {
@@ -89,7 +58,7 @@ function RouteComponent() {
                     <Button type="primary" block onClick={() => copyConfig()}>复制配置</Button>
                     <Button type="primary" block>保存简历</Button>
                     <Button block>导入配置</Button>
-                    <Button type="primary" block>下载PDF</Button>
+                    <Button type="primary" block onClick={() => reactToPrintFn()}>下载PDF</Button>
                     <Button type="primary" block>分享</Button>
                   </div>
                 </Affix>

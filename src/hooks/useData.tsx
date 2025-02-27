@@ -8,7 +8,7 @@ import { resumeQueryOptions } from '~/api'
 export interface DataLoading {
   isLoading: boolean
   data: ResumeConfig | undefined
-  refetch: () => void
+  refreshData: () => void
   copyConfig: () => void
   confirmMessage: (renderKey: ResumeConfigKeys, data: any) => void
 }
@@ -19,12 +19,11 @@ export default function DataContextProvider({ children }: { children: React.Reac
   const [configValue, setConfigValue] = useLocalStorage<ResumeConfig | undefined>(
     {
       key: 'use-global-data',
-      defaultValue: undefined,
     },
   )
   const clipboard = useClipboard({ timeout: 500 })
   const { message } = App.useApp()
-  const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', !message))
+  const { isLoading, data, refetch: refreshData } = useQuery(resumeQueryOptions('zh', 'master', !localStorage.getItem('use-global-data')))
 
   const confirmMessage = useCallback((renderKey: ResumeConfigKeys, data: any) => {
     setConfigValue(prevData => ({ ...prevData, [renderKey]: data }))
@@ -46,7 +45,7 @@ export default function DataContextProvider({ children }: { children: React.Reac
       isLoading,
       data: configValue,
       copyConfig,
-      refetch: refreshData,
+      refreshData,
       confirmMessage,
     }
   }, [isLoading, configValue, copyConfig, refreshData, confirmMessage])

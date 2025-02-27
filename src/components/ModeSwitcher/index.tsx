@@ -5,7 +5,7 @@ function ModeSwitcher() {
   const { changeMode, isEdit, canPreview } = useModeSwitcher()
 
   return (
-    <div className=" mx-[7px] inline-block text-xs text-text-white">
+    <div className=" mx-2 inline-block text-xs text-white">
       {
         !isEdit && (
           <span onClick={() => changeMode('edit')} className=" cursor-pointer">编辑</span>

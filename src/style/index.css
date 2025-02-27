@@ -2,12 +2,10 @@
 
 @plugin "./custom-icon";
 
-
-@theme {
-  --color-primary: #273f75;
-  --color-text-white: #ffffffd9;
-  --color-text-disabled: #ffffff40;
-  --color-text-desc: #00000073;
+body {
+  @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
 }
 
 @variant dark (&:where(.dark, .dark *));

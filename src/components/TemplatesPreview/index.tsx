@@ -25,7 +25,7 @@ function TemplateItem({ item, isActive, changeSearch }: ITemplateItemProps) {
         className={clx('w-[160px]  shadow mb-2  box-border border-white/20  border-solid border', isActive ? ' !border-black/20' : '')}
       />
       <span className=" text-black/65 text-sm">{item.id}</span>
-      <span className="text-xs text-text-desc">
+      <span className="text-xs text-black">
         { item.description }
       </span>
     </div>
