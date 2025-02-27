@@ -31,7 +31,7 @@ function Profile() {
 
   return (
     <div className=" flex  justify-between items-center">
-      <SizeSpace className=' flex-1' direction='vertical'>
+      <SizeSpace className=" flex-1" direction="vertical">
         <div className=" text-2xl ">{data?.profile?.name}</div>
         <div className=" grid grid-cols-2" style={{ gap: size * 2 }}>
           { profileList.map(item => (<ProfileItem key={item.id} {...item} />)) }

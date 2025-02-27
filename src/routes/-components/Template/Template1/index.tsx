@@ -10,7 +10,7 @@ function Template1() {
   const { data } = useGlobalData()
 
   return (
-    <SizeSpace className=" px-6 py-4" direction={'vertical'}>
+    <SizeSpace className=" px-6 py-4" direction="vertical">
       <Profile />
       <WrapperSection title="教育背景">
         {data?.educationList?.map(education => <EducationItem key={education.school} {...education} />)}
