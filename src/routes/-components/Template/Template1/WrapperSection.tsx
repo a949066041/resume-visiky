@@ -2,7 +2,7 @@ import { theme } from 'antd'
 import clx from 'classix'
 import { SizeSpace } from '~/hooks'
 
-function WrapperSection<T extends object>({ children, title, show = true }: { children: React.ReactNode, title: string, show?: boolean, value: T[] }) {
+function WrapperSection({ children, title, show = true }: { children: React.ReactNode, title: string, show?: boolean }) {
   const { token } = theme.useToken()
 
   if (!show) {
