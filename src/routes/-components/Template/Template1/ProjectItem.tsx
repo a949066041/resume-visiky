@@ -11,7 +11,7 @@ function ProjectItem({ project_name, project_time, project_desc, project_content
     <SizeSpace direction="vertical" className=" w-full" small>
       <div className=" flex justify-between items-center">
         <SizeSpace>
-          <b>{project_name}</b>
+          <span className=" text-sm font-bold">{project_name}</span>
           <div style={{ color: token.colorTextDescription }} className=" text-xs">
             {project_time}
           </div>

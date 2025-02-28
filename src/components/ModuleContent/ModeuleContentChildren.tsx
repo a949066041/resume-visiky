@@ -64,6 +64,12 @@ function ModuleContentChildren({ parentKey, onConfig }: { parentKey: ResumeConfi
     if (parentKey === 'projectList') {
       return data[parentKey]!.map(item => ({ value: `${item.project_name}-${item.project_role}-${item.project_desc}-${item.project_time}-${item.project_desc}`, id: item.project_name }))
     }
+    if (parentKey === 'workList') {
+      return data[parentKey]!.map(item => ({ value: `${item.work_name}-${item.visit_link}`, id: item.work_name }))
+    }
+    if (parentKey === 'skillList') {
+      return data[parentKey]!.map(item => ({ value: `${item.skill_name}-${item.skill_level}`, id: item.skill_name }))
+    }
     return [] as DragItem[]
   }, [data, parentKey])
 
@@ -101,11 +107,11 @@ function ModuleContentChildren({ parentKey, onConfig }: { parentKey: ResumeConfi
             {
               (subList || []).map((item, index) => (
                 <SortableItem key={item.id} value={item.value} id={item.id}>
-                  <div className=" flex hover:bg-amber-600  py-2 px-3 rounded-xl transition-all items-center">
+                  <div className="  group flex hover:bg-amber-600  py-2 px-3 rounded-xl transition-all items-center">
                     <div onClick={() => onConfig(index)} className=" flex-1  truncate " key={item.id}>
                       {item.value}
                     </div>
-                    <i className="icon-[icon-park-outline--delete] cursor-pointer" onClick={() => handleDelete(index)}></i>
+                    <i className="icon-[icon-park-outline--delete] cursor-pointer  group-hover:block hidden" onClick={() => handleDelete(index)}></i>
                   </div>
                 </SortableItem>
               ))

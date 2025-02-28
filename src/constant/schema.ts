@@ -179,15 +179,16 @@ const workListSchema: Schema = {
     work_name: {
       type: 'string',
       title: '作品名称',
+      required: true,
+    },
+    visit_link: {
+      type: 'string',
+      title: '作品链接',
     },
     work_desc: {
       type: 'string',
       title: '作品描述',
       widget: 'TextArea',
-    },
-    visit_link: {
-      type: 'string',
-      title: '作品链接',
     },
   },
 }
@@ -198,6 +199,7 @@ const skillListSchema: Schema = {
     skill_name: {
       type: 'string',
       title: '技能名称',
+      required: true,
     },
     skill_level: {
       type: 'number',

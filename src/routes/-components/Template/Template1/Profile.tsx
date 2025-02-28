@@ -39,8 +39,10 @@ function Profile() {
       </SizeSpace>
       {
         !data?.avatar?.hidden && (
-          <div className=" w-20 h-20 flex-none">
-            <Avatar {...data?.avatar} />
+          <div className=" w-40">
+            <div className=" w-20 h-20 mx-auto flex-none">
+              <Avatar {...data?.avatar} />
+            </div>
           </div>
         )
       }

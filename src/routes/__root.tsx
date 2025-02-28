@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import DataContextProvider from '~/hooks/useData'
 import SizeContextProvider from '~/hooks/useSize'
 import Footer from './-components/Footer'
+import GlobalConfig from './-components/GlobalConfig'
 import Header from './-components/Header'
 
 interface MyRouterContext {
@@ -34,11 +35,12 @@ function RootComponent() {
             <DataContextProvider>
               <ConfigProvider
                 locale={i18n.language === 'zh' ? zhCN : en}
-                theme={{ token: { colorPrimary: color, borderRadius: 2 } }}
+                theme={{ token: { colorPrimary: color, borderRadius: 2 }, components: { Rate: { starSize: 14 } } }}
               >
                 <Header />
                 <Outlet />
                 <Footer />
+                <GlobalConfig />
               </ConfigProvider>
             </DataContextProvider>
           )
