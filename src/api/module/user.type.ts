@@ -77,7 +77,7 @@ export interface ResumeConfig {
   /** 个人技能 */
   skillList?: Array<{
     /** 技能项 */
-    skill_name?: string
+    skill_name: string
     /** 掌握程度 */
     skill_level?: number
     /** 技能描述 */
@@ -93,7 +93,7 @@ export interface ResumeConfig {
 
   /** 作品 */
   workList?: Array<{
-    work_name?: string
+    work_name: string
     work_desc?: string
     visit_link?: string
   }>
