@@ -81,7 +81,8 @@ const educationSchema: Schema = {
   properties: {
     edu_time: {
       required: true,
-      type: 'string',
+      type: 'range',
+      format: 'date',
       title: '时间',
     },
     school: {
@@ -131,7 +132,6 @@ const workExpListSchema: Schema = {
       title: '公司名称',
     },
     department_name: {
-      required: true,
       type: 'string',
       title: '部门名称',
     },
