@@ -94,7 +94,6 @@ export const profileConfig = [
   ['mobile', 'icon-[icon-park-outline--phone-telephone]'],
   ['email', 'icon-[icon-park-outline--mail]'],
   ['github', 'icon-[icon-park-outline--github]'],
-  ['zhihu', 'icon-[ri--zhihu-fill]'],
   ['workExpYear', 'icon-[iwwa--year]', '工作经验：'],
   ['workPlace', 'icon-[icon-park-outline--local-two]'],
   ['positionTitle', 'icon-[icon-park-outline--like]'],

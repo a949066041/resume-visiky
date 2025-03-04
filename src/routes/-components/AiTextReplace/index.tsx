@@ -4,14 +4,18 @@ import { useToggle } from '@mantine/hooks'
 import { Dropdown, Popconfirm } from 'antd'
 import React, { useMemo } from 'react'
 import { fetchAiText } from '~/api'
+import TextRender from '~/components/TextRender'
+
+export interface IAiCommonItemProps {
+  onChangeAiText?: (key: string, newValue: string) => void
+}
 
 interface AiTextReplaceProps {
-  children: React.ReactNode
   text?: string
   onReplace?: (text: string) => void
 }
 
-function AiTextReplace({ children, text, onReplace }: AiTextReplaceProps) {
+function AiTextReplace({ text, onReplace }: AiTextReplaceProps) {
   const [lines, setLines] = React.useState<Record<string, string>[]>([])
   const content = lines.map(line => JSON.parse(line.data).answer).join('')
 
@@ -65,7 +69,7 @@ function AiTextReplace({ children, text, onReplace }: AiTextReplaceProps) {
       <span>
         <Dropdown menu={{ items, onClick: handleClickMenu }} trigger={['contextMenu']}>
           <span>
-            { children }
+            <TextRender text={text} />
           </span>
         </Dropdown>
       </span>

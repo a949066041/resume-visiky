@@ -1,4 +1,3 @@
-import TextRender from '~/components/TextRender'
 import { SizeSpace, useGlobalData } from '~/hooks'
 import AiTextReplace from '../../AiTextReplace'
 import { useAiTemplate } from '../../AiTextReplace/templateAiContext'
@@ -12,7 +11,6 @@ import WrapperSection from './WrapperSection'
 
 function Template1() {
   const { data } = useGlobalData()
-
   const { changeAiText } = useAiTemplate()
 
   return (
@@ -25,9 +23,10 @@ function Template1() {
         { data?.workList?.map(work => <WorkItem {...work} key={work.work_name} />) }
       </WrapperSection>
       <WrapperSection title="自我介绍">
-        <AiTextReplace text={data?.aboutme?.aboutme_desc} onReplace={newText => changeAiText('aboutme', { aboutme_desc: newText })}>
-          <TextRender text={data?.aboutme?.aboutme_desc} />
-        </AiTextReplace>
+        <AiTextReplace
+          text={data?.aboutme?.aboutme_desc}
+          onReplace={newText => changeAiText('aboutme', { aboutme_desc: newText })}
+        />
       </WrapperSection>
       <WrapperSection title="个人技能" show={!!data?.skillList?.length}>
         { data?.skillList?.map(skill => <SKillItem {...skill} key={skill.skill_name} />) }

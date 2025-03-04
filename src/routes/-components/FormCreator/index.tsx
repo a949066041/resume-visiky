@@ -3,7 +3,9 @@ import type { ResumeConfigKeys } from '~/api'
 import FormRender, { useForm } from 'form-render'
 import { isArray } from 'lodash-es'
 import { useEffect, useMemo } from 'react'
+
 import { useGlobalData } from '~/hooks'
+import CustomDateRange from './CustomDateRange'
 
 interface IFormCreatorProps {
   schema: Schema
@@ -47,6 +49,7 @@ function FormCreator({ schema, schemaKey, listIndex = 0, onClose }: IFormCreator
     <FormRender
       form={form}
       schema={schema}
+      widgets={{ CustomDateRange }}
       footer
       onFinish={saveFormData}
     />

@@ -122,9 +122,10 @@ const workExpListSchema: Schema = {
   type: 'object',
   properties: {
     work_time: {
-      required: true,
-      type: 'string',
+      type: 'range',
+      format: 'month',
       title: '起止时间',
+      widget: 'CustomDateRange',
     },
     company_name: {
       required: true,

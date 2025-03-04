@@ -6,7 +6,7 @@ import { author, homepage, version } from './package.json' with { type: 'json' }
 const { publicVars } = loadEnv()
 const APP_TITLE = 'Resume Generator'
 
-console.log({ publicVars })
+console.log(publicVars)
 
 export default defineConfig({
   plugins: [pluginReact()],
