@@ -1,7 +1,7 @@
 import { useToggle } from '@mantine/hooks'
 import { Drawer as AntdDrawer, Button, Segmented } from 'antd'
 import { useState } from 'react'
-import ModuleContent from '../ModuleContent'
+import ModuleContent from '../../routes/-components/ModuleContent'
 import TemplatesPreview from '../TemplatesPreview'
 
 function Drawer() {
