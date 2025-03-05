@@ -17,7 +17,7 @@ interface AiTextReplaceProps {
 
 function AiTextReplace({ text, onReplace }: AiTextReplaceProps) {
   const [lines, setLines] = React.useState<Record<string, string>[]>([])
-  const content = lines.map(line => JSON.parse(line.data).answer).join('')
+  const content = lines.map(line => JSON.parse(line.data).output.text).join('')
 
   const [open, toggleOpen] = useToggle()
 
