@@ -1,17 +1,19 @@
+import type { IAiCommonItemProps } from '../../AiTextReplace'
 import type { ResumeConfig } from '~/api'
-import TextRender from '~/components/TextRender'
+import { Button } from 'antd'
 import { SizeSpace } from '~/hooks'
+import AiTextReplace from '../../AiTextReplace'
 
-export type WorkItemProps = Required<ResumeConfig>['workList'][0]
+export type WorkItemProps = Required<ResumeConfig>['workList'][0] & IAiCommonItemProps
 
-function WorkItem({ work_name, work_desc, visit_link }: WorkItemProps) {
+function WorkItem({ work_name, work_desc, visit_link, onChangeAiText }: WorkItemProps) {
   return (
     <SizeSpace direction="vertical" small>
       <SizeSpace>
         <span className=" font-bold">{ work_name }</span>
-        <a href={visit_link}>访问连接</a>
+        <Button type="link" href={visit_link}>访问连接</Button>
       </SizeSpace>
-      <TextRender text={work_desc} />
+      <AiTextReplace text={work_desc} onReplace={aiText => onChangeAiText?.('work_desc', aiText)} />
     </SizeSpace>
   )
 }

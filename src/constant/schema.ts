@@ -150,8 +150,9 @@ const projectListSchema: Schema = {
   properties: {
     project_time: {
       required: true,
-      type: 'string',
+      type: 'range',
       title: '起止时间',
+      widget: 'CustomDateRange',
     },
     project_name: {
       type: 'string',

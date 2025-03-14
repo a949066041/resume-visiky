@@ -13,9 +13,10 @@ export interface IAiCommonItemProps {
 interface AiTextReplaceProps {
   text?: string
   onReplace?: (text: string) => void
+  className?: string
 }
 
-function AiTextReplace({ text, onReplace }: AiTextReplaceProps) {
+function AiTextReplace({ text, onReplace, className }: AiTextReplaceProps) {
   const [lines, setLines] = React.useState<Record<string, string>[]>([])
   const content = lines.map(line => JSON.parse(line.data).output.text).join('')
 
@@ -69,7 +70,7 @@ function AiTextReplace({ text, onReplace }: AiTextReplaceProps) {
       <span>
         <Dropdown menu={{ items, onClick: handleClickMenu }} trigger={['contextMenu']}>
           <span>
-            <TextRender text={text} />
+            <TextRender className={className} text={text} />
           </span>
         </Dropdown>
       </span>

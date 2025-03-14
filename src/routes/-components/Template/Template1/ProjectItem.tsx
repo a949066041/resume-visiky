@@ -15,7 +15,7 @@ function ProjectItem({ project_name, project_time, project_desc, project_content
         <SizeSpace>
           <span className=" text-sm font-bold">{project_name}</span>
           <div style={{ color: token.colorTextDescription }} className=" text-xs">
-            {project_time}
+            { Array.isArray(project_time) ? project_time?.join('~') : project_time}
           </div>
         </SizeSpace>
         <div className=" text-xs p-1 px-2 text-white rounded-full" style={{ backgroundColor: token.colorPrimary }}>
