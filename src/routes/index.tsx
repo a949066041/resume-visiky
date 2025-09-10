@@ -6,6 +6,7 @@ import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
 import Drawer from '~/components/Drawer'
 import { useGlobalData, useModeSwitcher, useRootSearch } from '~/hooks'
+import { AiTemplateProvider } from './-components/AiTextReplace/templateAiContext'
 import EditBanner from './-components/EditBanner'
 import Template from './-components/Template'
 
@@ -42,7 +43,9 @@ function RouteComponent() {
         { isEdit && <EditBanner /> }
         <div className="  mx-auto p-3 mb-10 flex w-full justify-center">
           <div ref={contentRef} className="min-h-[942px] w-[794px] mr-2 shadow-2xl print:shadow-[none]">
-            <RenderTempate />
+            <AiTemplateProvider>
+              <RenderTempate />
+            </AiTemplateProvider>
           </div>
           {
             isEdit && (

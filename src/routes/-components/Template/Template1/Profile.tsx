@@ -24,7 +24,7 @@ function Profile() {
       return []
     }
     const profileValue = data.profile
-    return profileConfig.map(([key, icon]) => ({ value: profileValue?.[key], icon, id: key }))
+    return profileConfig.map(([key, icon, pre]) => ({ value: profileValue?.[key] ? `${pre || ''}${profileValue?.[key]}` : '', icon, id: key }))
       .filter(item => item.value)
       .slice(0, 6)
   }, [data?.profile])

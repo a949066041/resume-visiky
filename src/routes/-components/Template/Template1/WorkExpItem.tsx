@@ -1,12 +1,13 @@
+import type { IAiCommonItemProps } from '../../AiTextReplace'
 import type { ResumeConfig } from '~/api'
 import { theme } from 'antd'
-import TextRender from '~/components/TextRender'
 import { SizeSpace } from '~/hooks'
+import AiTextReplace from '../../AiTextReplace'
 import RangTimeText from './RangTimeText'
 
-export type WorkExpItemProps = Required<ResumeConfig>['workExpList'][0]
+export type WorkExpItemProps = Required<ResumeConfig>['workExpList'][0] & IAiCommonItemProps
 
-function WorkExpItem({ work_time, company_name, department_name, work_desc }: WorkExpItemProps) {
+function WorkExpItem({ work_time, company_name, department_name, work_desc, onChangeAiText }: WorkExpItemProps) {
   const { token } = theme.useToken()
   return (
     <SizeSpace direction="vertical" key={company_name} small className=" w-full">
@@ -17,7 +18,7 @@ function WorkExpItem({ work_time, company_name, department_name, work_desc }: Wo
         </SizeSpace>
         <RangTimeText time={work_time} />
       </div>
-      <TextRender text={work_desc} />
+      <AiTextReplace text={work_desc} onReplace={aiText => onChangeAiText?.('work_desc', aiText)} />
     </SizeSpace>
   )
 }

@@ -1,8 +1,9 @@
+import type { IAiCommonItemProps } from '../../AiTextReplace'
 import type { ResumeConfig } from '~/api'
 import { SizeSpace } from '~/hooks'
 import RangTimeText from './RangTimeText'
 
-export type EducationItemProps = Required<ResumeConfig>['educationList'][0]
+export type EducationItemProps = Required<ResumeConfig>['educationList'][0] & IAiCommonItemProps
 
 function EducationItem({ edu_time, school, major, academic_degree }: EducationItemProps) {
   return (

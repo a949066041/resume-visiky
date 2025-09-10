@@ -81,7 +81,8 @@ const educationSchema: Schema = {
   properties: {
     edu_time: {
       required: true,
-      type: 'string',
+      type: 'range',
+      format: 'date',
       title: '时间',
     },
     school: {
@@ -121,9 +122,10 @@ const workExpListSchema: Schema = {
   type: 'object',
   properties: {
     work_time: {
-      required: true,
-      type: 'string',
+      type: 'range',
+      format: 'month',
       title: '起止时间',
+      widget: 'CustomDateRange',
     },
     company_name: {
       required: true,
@@ -131,7 +133,6 @@ const workExpListSchema: Schema = {
       title: '公司名称',
     },
     department_name: {
-      required: true,
       type: 'string',
       title: '部门名称',
     },
@@ -149,8 +150,9 @@ const projectListSchema: Schema = {
   properties: {
     project_time: {
       required: true,
-      type: 'string',
+      type: 'range',
       title: '起止时间',
+      widget: 'CustomDateRange',
     },
     project_name: {
       type: 'string',

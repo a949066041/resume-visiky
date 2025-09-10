@@ -13,3 +13,4 @@ dist/
 
 # assets
 custom.json
+.env

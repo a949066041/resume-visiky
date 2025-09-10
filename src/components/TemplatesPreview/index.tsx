@@ -5,7 +5,7 @@ import { ReactSVG } from 'react-svg'
 import { TEMPLATES } from '~/constant'
 import { useRootSearch } from '~/hooks'
 
-interface ITemplateItemProps {
+export interface ITemplateItemProps {
   item: Template
   isActive: boolean
   changeSearch: ReturnType<typeof useRootSearch>['changeSearch']
