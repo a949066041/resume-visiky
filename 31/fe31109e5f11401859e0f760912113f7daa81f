@@ -1,0 +1,37 @@
+src/style/index.css
+  s_ef595e6ea847be::t_35771c3aff4088 12-18
+src/routes/-components/Template/Template1/SkillItem.tsx
+  s_ef595e6ea847be::t_1198ff9f0b12b2 11
+src/routes/-components/Template/Template1/EducationItem.tsx
+  s_ef595e6ea847be::t_21e779b0351ad9 10
+src/routes/-components/Template/Template1/WorkExpItem.tsx
+  s_ef595e6ea847be::t_c72842b3ae5594 13
+package.json
+  h_47deb149cdb37b 45
+src/routes/-components/Template/Template1/WorkItem.tsx
+  s_ef595e6ea847be::t_c0d4e39c6ef931 11
+src/routes/-components/Template/Template1/ProjectItem.tsx
+  s_ef595e6ea847be::t_e8de5196a57c57 13
+  h_47deb149cdb37b 17,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "31fe31109e5f11401859e0f760912113f7daa81f",
+  "prompts": {},
+  "humans": {
+    "h_47deb149cdb37b": {
+      "author": "a949066041 <949066041@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_ef595e6ea847be": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "52af3616-970f-45eb-a32a-af6611e78ad9",
+        "model": "composer-2.5"
+      },
+      "human_author": "a949066041 <949066041@qq.com>"
+    }
+  }
+}
