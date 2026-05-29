@@ -9,3 +9,10 @@ body {
 }
 
 @variant dark (&:where(.dark, .dark *));
+
+@media print {
+  .resume-print-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

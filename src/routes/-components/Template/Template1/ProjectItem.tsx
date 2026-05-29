@@ -10,13 +10,13 @@ function ProjectItem({ project_name, project_time, project_desc, project_content
   const { token } = theme.useToken()
 
   return (
-    <SizeSpace direction="vertical" className=" w-full" small>
+    <SizeSpace direction="vertical" className="resume-print-block w-full" small>
       <div className=" flex justify-between items-center">
         <SizeSpace>
           <span className=" text-sm font-bold">{project_name}</span>
-          <div style={{ color: token.colorTextDescription }} className=" text-xs">
+          {/* <div style={{ color: token.colorTextDescription }} className=" text-xs">
             { Array.isArray(project_time) ? project_time?.join('~') : project_time}
-          </div>
+          </div> */}
         </SizeSpace>
         <div className=" text-xs p-1 px-2 text-white rounded-full" style={{ backgroundColor: token.colorPrimary }}>
           {project_role}

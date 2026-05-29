@@ -7,7 +7,7 @@ export type EducationItemProps = Required<ResumeConfig>['educationList'][0] & IA
 
 function EducationItem({ edu_time, school, major, academic_degree }: EducationItemProps) {
   return (
-    <div className=" flex items-center justify-between w-full">
+    <div className="resume-print-block flex items-center justify-between w-full">
       <SizeSpace className=" flex" small>
         <b>{school}</b>
         {major && <span>{major}</span>}

@@ -10,7 +10,7 @@ export type WorkExpItemProps = Required<ResumeConfig>['workExpList'][0] & IAiCom
 function WorkExpItem({ work_time, company_name, department_name, work_desc, onChangeAiText }: WorkExpItemProps) {
   const { token } = theme.useToken()
   return (
-    <SizeSpace direction="vertical" key={company_name} small className=" w-full">
+    <SizeSpace direction="vertical" key={company_name} small className="resume-print-block w-full">
       <div className=" flex items-center justify-between">
         <SizeSpace>
           <span className=" text-sm font-bold">{company_name}</span>

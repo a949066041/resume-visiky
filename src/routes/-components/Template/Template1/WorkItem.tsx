@@ -8,7 +8,7 @@ export type WorkItemProps = Required<ResumeConfig>['workList'][0] & IAiCommonIte
 
 function WorkItem({ work_name, work_desc, visit_link, onChangeAiText }: WorkItemProps) {
   return (
-    <SizeSpace direction="vertical" small>
+    <SizeSpace direction="vertical" small className="resume-print-block">
       <SizeSpace>
         <span className=" font-bold">{ work_name }</span>
         <Button type="link" href={visit_link}>访问连接</Button>

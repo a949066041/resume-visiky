@@ -8,7 +8,7 @@ export type SkillItemProps = Required<ResumeConfig>['skillList'][0] & IAiCommonI
 
 function SKillItem({ skill_name, skill_desc, skill_level, onChangeAiText }: SkillItemProps) {
   return (
-    <SizeSpace className=" w-full justify-between" direction="vertical">
+    <SizeSpace className="resume-print-block w-full justify-between" direction="vertical">
       <SizeSpace>
         <span className=" text-base font-bold">
           {skill_name}
