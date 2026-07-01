@@ -51,7 +51,8 @@ export default function DataContextProvider({ children }: { children: React.Reac
       }
       setConfigValue(parsed)
       message.success('导入成功')
-    } catch {
+    }
+    catch {
       message.error('导入失败，请先复制配置 JSON 到剪贴板')
     }
   }, [message, setConfigValue])
