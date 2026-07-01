@@ -10,7 +10,7 @@ export interface DataLoading {
   data: ResumeConfig | undefined
   refreshData: () => void
   copyConfig: () => void
-  importConfig: () => Promise<void>
+  importConfig: (file: File) => Promise<void>
   confirmMessage: (renderKey: ResumeConfigKeys, data: any) => void
 }
 
@@ -41,18 +41,18 @@ export default function DataContextProvider({ children }: { children: React.Reac
     message.success('复制成功')
   }, [message, clipboard, configValue])
 
-  const importConfig = useCallback(async () => {
+  const importConfig = useCallback(async (file: File) => {
     try {
-      const text = await navigator.clipboard.readText()
+      const text = await file.text()
       const parsed = JSON.parse(text)
       if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-        message.error('剪贴板内容不是有效的配置 JSON')
+        message.error('文件内容不是有效的配置 JSON')
         return
       }
       setConfigValue(parsed)
       message.success('导入成功')
     } catch {
-      message.error('导入失败，请先复制配置 JSON 到剪贴板')
+      message.error('导入失败，请检查文件格式')
     }
   }, [message, setConfigValue])
 

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Affix, Button, Spin } from 'antd'
-import { useEffect, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 import z from 'zod'
@@ -29,6 +29,17 @@ function RouteComponent() {
   const contentRef = useRef<HTMLDivElement>(null)
   const reactToPrintFn = useReactToPrint({ contentRef })
 
+  const handleImport = useCallback(() => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (file) importConfig(file)
+    }
+    input.click()
+  }, [importConfig])
+
   const RenderTempate = useMemo(() => {
     return Template[params.template]
   }, [params.template])
@@ -55,7 +66,7 @@ function RouteComponent() {
                     <Drawer />
                     <Button type="primary" block onClick={() => copyConfig()}>复制配置</Button>
                     <Button type="primary" block>保存简历</Button>
-                    <Button block onClick={() => importConfig()}>导入配置</Button>
+                    <Button block onClick={handleImport}>导入配置</Button>
                     <Button type="primary" block onClick={() => reactToPrintFn()}>下载PDF</Button>
                     <Button type="primary" block>分享</Button>
                   </div>
