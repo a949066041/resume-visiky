@@ -23,7 +23,7 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
   const { changeSearch, params } = useRootSearch()
   const { i18n } = useTranslation()
-  const { isLoading, copyConfig } = useGlobalData()
+  const { isLoading, copyConfig, importConfig } = useGlobalData()
   const { isEdit } = useModeSwitcher()
 
   const contentRef = useRef<HTMLDivElement>(null)
@@ -55,7 +55,7 @@ function RouteComponent() {
                     <Drawer />
                     <Button type="primary" block onClick={() => copyConfig()}>复制配置</Button>
                     <Button type="primary" block>保存简历</Button>
-                    <Button block>导入配置</Button>
+                    <Button block onClick={() => importConfig()}>导入配置</Button>
                     <Button type="primary" block onClick={() => reactToPrintFn()}>下载PDF</Button>
                     <Button type="primary" block>分享</Button>
                   </div>
