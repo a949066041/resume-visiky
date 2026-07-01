@@ -35,7 +35,8 @@ function RouteComponent() {
     input.accept = '.json'
     input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0]
-      if (file) importConfig(file)
+      if (file)
+        importConfig(file)
     }
     input.click()
   }, [importConfig])
